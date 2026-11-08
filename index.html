@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Madielle Oteľ — бөлмелерді брондау</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><h1>🏨 Madielle Oteľ</h1><p>Қонақүй бөлмелерін онлайн брондау · жайлы демалыс сіздің қолыңызда</p></header>
+<nav id="nav"><button data-go="sec-find">🔎 Бронь іздеу</button><button data-go="sec-rooms">🏨 Бөлмелер</button><button data-go="form">📝 Өтінім</button><button data-go="sec-list">📋 Брондар</button><button data-go="sec-req">💬 Сұраныстар</button><button data-go="sec-admin">⚙️ Басқару</button><button data-go="sec-rep">📊 Есеп</button></nav>
+<main>
+<div class="card hero" id="sec-find"><h2>🔎 Брондауды табу</h2>
+<p class="mu" style="margin:0 0 10px">Брондау нөмірін, қонақтың аты-жөнін немесе телефонын енгізіңіз.</p>
+<div class="row" style="margin-top:0"><input id="fq" placeholder="Мысалы: 5, BR-0005, Айдос немесе +7 701..." style="flex:1;min-width:200px"><button id="fb">Іздеу</button></div>
+<div id="fr"></div></div>
+<div class="card"><h2>Madielle Oteľ туралы</h2>
+<p class="mu" style="font-size:14px;margin:0 0 12px">Madielle Oteľ — қала орталығындағы жайлы 4 жұлдызды қонақүй. Біз қонақтарымызға таза бөлмелер, мейірімді қызмет және қолжетімді баға ұсынамыз.</p>
+<div class="svc"><div>⭐ 4 жұлдыз</div><div>🛎️ 15 бөлме</div><div>🕑 Кіру: 14:00</div><div>🕛 Шығу: 12:00</div></div>
+<h2 style="margin:16px 0 10px">Қызметтер</h2>
+<div class="svc"><div>📶 Тегін Wi-Fi</div><div>🍳 Таңғы ас</div><div>🏊 Бассейн</div><div>💆 СПА</div><div>🚗 Тұрақ</div><div>🛎️ 24/7 ресепшн</div><div>🚕 Трансфер</div><div>🍽️ Мейрамхана</div></div></div>
+<div class="card hero" id="sec-rooms"><h2>🔎 Бос бөлмені табу</h2><div class="grid">
+<div><label>Кіру күні</label><input id="hin" type="date"></div>
+<div><label>Шығу күні</label><input id="hout" type="date"></div>
+<div><label>Қонақ саны</label><input id="hg" type="number" min="1" max="6" value="2"></div>
+<div><label>Санат</label><select id="hc"></select></div>
+</div></div>
+<h2 style="margin:16px 0 10px">Бөлмелер және бағалар</h2>
+<div class="rooms" id="rooms"></div>
+<div class="stats">
+<div class="stat"><b id="sAll">0</b><span>Барлық бронь</span></div>
+<div class="stat"><b id="sOn">0</b><span>Белсенді</span></div>
+<div class="stat"><b id="sOff">0</b><span>Белсенді емес</span></div>
+</div>
+
+<div class="card">
+<h2 id="form">Өтінім қалдыру (брондау)</h2>
+<div class="grid">
+<div><label>Қонақтың аты-жөні</label><input id="name" placeholder="Мысалы: Айдос Нұрлан"></div>
+<div><label>Телефон</label><input id="phone" placeholder="+7 7__ ___ __ __"></div>
+<div><label>Бөлме</label><select id="room"></select></div>
+<div><label>Кіру күні</label><input id="din" type="date"></div>
+<div><label>Шығу күні</label><input id="dout" type="date"></div>
+<div><label>Қонақ саны</label><input id="guests" type="number" min="1" max="6" value="2"></div>
+<div><label>Статус</label><select id="status"><option value="active">Белсенді</option><option value="inactive">Белсенді емес</option></select></div>
+</div>
+<div class="row"><button id="add">Өтінім жіберу</button><button class="sec" id="reset">Деректерді бастапқы күйге қайтару</button></div>
+<div id="calc" class="calc"></div><div id="err"></div>
+</div>
+
+<div class="card">
+<h2 id="sec-list">Брондар тізімі</h2>
+<p class="chips-t">Бөлме санаты</p><div class="chips" id="crt"></div>
+<p class="chips-t">Тұру мерзімі</p><div class="chips" id="cdu"></div>
+<div class="grid">
+<div><label>Іздеу (аты, телефон, бөлме, санат)</label><input id="q" type="search" placeholder="Іздеу..."></div>
+<div><label>Статус бойынша</label><select id="f"><option value="all">Барлығы</option><option value="active">Белсенді</option><option value="inactive">Белсенді емес</option></select></div>
+<div><label>Сома (бастап, ₸)</label><input id="fp1" type="number" min="0"></div>
+<div><label>Сома (дейін, ₸)</label><input id="fp2" type="number" min="0"></div>
+<div><label>Қонақ саны (кемінде)</label><input id="fg" type="number" min="1"></div>
+<div><label>Бөлме</label><select id="frm"></select></div>
+<div><label>Кіру күні (бастап)</label><input id="fd1" type="date"></div>
+<div><label>Кіру күні (дейін)</label><input id="fd2" type="date"></div>
+<div><label>Сұрыптау</label><select id="s">
+<option value="din-asc">Кіру күні ↑</option><option value="din-desc">Кіру күні ↓</option>
+<option value="name-asc">Аты А→Я</option><option value="name-desc">Аты Я→А</option>
+<option value="total-asc">Сома ↑</option><option value="total-desc">Сома ↓</option><option value="room-asc">Бөлме ↑</option><option value="room-desc">Бөлме ↓</option><option value="nights-asc">Түн саны ↑</option><option value="nights-desc">Түн саны ↓</option><option value="id-desc">Жаңа брондар алдымен</option><option value="id-asc">Ескі брондар алдымен</option><option value="status-asc">Статус бойынша</option></select></div>
+</div>
+<div class="row"><button class="sec" id="fclr">Сүзгілерді тазалау</button><span id="fcnt" class="mu"></span></div>
+<div class="tw" style="margin-top:12px"><table>
+<thead><tr><th>№</th><th>Қонақ</th><th>Телефон</th><th>Бөлме</th><th>Кіру – Шығу</th><th>Сома</th><th>Статус</th><th></th></tr></thead>
+<tbody id="tb"></tbody></table></div>
+</div>
+<div class="card" id="sec-req"><h2>💬 Сұраныстар (запрос)</h2>
+<div class="grid">
+<div><label>Брондау №</label><input id="qb" type="number" min="1" placeholder="Мысалы: 5"></div>
+<div><label>Сұраныс түрі</label><select id="qt"><option>Кеш шығу</option><option>Ерте кіру</option><option>Қосымша кереует</option><option>Трансфер</option><option>Таңғы ас</option><option>Тазалау</option><option>Басқа</option></select></div>
+<div style="grid-column:1/-1"><label>Хабарлама</label><input id="qm" placeholder="Қосымша мәлімет..."></div></div>
+<div class="row"><button id="qa">Сұраныс жіберу</button><span id="qe" class="mu"></span></div>
+<div class="grid" style="margin-top:12px"><div><label>Сұраныстарды іздеу</label><input id="qs" type="search" placeholder="Іздеу..."></div><div><label>Статус</label><select id="qf"><option value="all">Барлығы</option><option value="new">Жаңа</option><option value="done">Орындалды</option></select></div></div>
+<div id="ql"></div></div>
+<div class="card"><h2 id="sec-admin">➕ Жаңа бөлме қосу</h2><div class="grid">
+<div><label>Бөлме нөмірі</label><input id="rn" placeholder="Мысалы: 105"></div>
+<div><label>Санат</label><select id="rc"></select></div>
+<div><label>Бағасы (₸ / түн)</label><input id="rp" type="number" min="1000" step="500" placeholder="18000"></div>
+</div><div class="row"><button id="addRoom">Бөлмені қосу</button><span id="rerr" class="mu"></span></div>
+<p class="chips-t" style="margin-top:12px">Бөлмелер тізімі (өшіру үшін ✕ басыңыз)</p><div class="chips" id="rl"></div></div>
+<div class="card"><h2 id="sec-rep">📊 Есеп (отчет)</h2><div class="grid">
+<div><label>Кіру күні (бастап)</label><input id="ra" type="date"></div>
+<div><label>Кіру күні (дейін)</label><input id="rb" type="date"></div>
+<div><label>Статус</label><select id="rs"><option value="all">Барлығы</option><option value="active">Белсенді</option><option value="inactive">Белсенді емес</option></select></div>
+<div><label>Санат</label><select id="rcat"></select></div></div>
+<div id="rep"></div>
+<div class="row"><button id="pdfb">📄 PDF ашу</button><button class="sec" id="pdfd">⬇️ PDF сақтау</button><button id="xlb">📗 Excel жүктеу</button><button class="sec" id="csvb">CSV көрсету</button><button class="sec" id="prn">🖨️ Басып шығару</button></div>
+<span id="rexp" class="mu"></span><textarea id="csv" hidden readonly rows="8"></textarea></div>
+<div id="pdfbox"></div>
+<div class="card foot"><b>🏨 Madielle Oteľ</b><br>📍 Алматы қ., Абай даңғылы, 100 · 📞 +7 727 000 00 00 · ✉️ info@madielle.kz<br><span class="mu">Ресепшн тәулік бойы жұмыс істейді · © 2026 Madielle Oteľ</span></div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
