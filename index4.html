@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Madiyar — визитка</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&subset=cyrillic,cyrillic-ext&display=swap" rel="stylesheet">
+<style>
+:root{--bg1:#F1EFFF;--bg2:#CFC8F7;--ink:#1B1840;--mut:#5A5788;--panel:#fff;--acc:#6C4DFF;--acc2:#FF6B57;color-scheme:light}
+@media(prefers-color-scheme:dark){:root{--bg1:#2A2260;--bg2:#0E0C24;--ink:#F1EFFF;--mut:#B3B0DB;--panel:#1D1946;--acc:#8F78FF;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:grid;place-content:center;justify-items:center;gap:26px;padding:24px 16px;font:400 15px/1.5 Montserrat,system-ui,sans-serif;color:var(--ink);background:radial-gradient(ellipse at 50% 25%,var(--bg1),var(--bg2)) fixed var(--bg2)}
+.scene{perspective:1000px;width:min(420px,92vw)}
+.tilt{transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .15s}
+.card{position:relative;aspect-ratio:1.75;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.2,.8,.2,1);cursor:pointer}
+.card.flip{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:22px;padding:6%;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 30px 50px -22px rgba(30,10,120,.55);display:flex;flex-direction:column;justify-content:space-between}
+.front{background:linear-gradient(135deg,#6C4DFF,#3B27B8);color:#fff}
+.back{background:var(--panel);transform:rotateY(180deg);border:1px solid rgba(120,100,230,.3)}
+.front h1{margin:0;font:800 clamp(24px,7vw,34px)/1.1 Montserrat,system-ui,sans-serif}
+.front p{margin:6px 0 0;opacity:.9;font-weight:600}
+.front small{opacity:.8}
+.dot{width:34px;height:34px;border-radius:50%;background:var(--acc2);box-shadow:inset -6px -6px 0 rgba(0,0,0,.18)}
+.back h2{margin:0;font:800 18px Montserrat,system-ui,sans-serif}
+.back ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.back a{color:var(--acc);font-weight:600;text-decoration:none}
+.back a:hover{text-decoration:underline}
+.back span{color:var(--mut)}
+button{font:inherit;cursor:pointer;border:0;background:var(--acc);color:#fff;font-weight:800;padding:12px 22px;border-radius:14px;box-shadow:0 5px 0 rgba(0,0,0,.25)}
+button:active{transform:translateY(4px);box-shadow:none}
+:focus-visible{outline:3px solid var(--acc2);outline-offset:3px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:420px}
+.chips b{padding:6px 14px;border-radius:99px;background:var(--panel);border:1px solid rgba(120,100,230,.3);font-weight:600;font-size:13px}
+@media(prefers-reduced-motion:reduce){.card,.tilt{transition:none}}
+</style>
+</head>
+<body>
+<div class="scene" id="scene"><div class="tilt" id="tilt">
+  <div class="card" id="card" aria-live="polite">
+    <div class="face front">
+      <div class="dot"></div>
+      <div><h1>Madiyar</h1><p>Frontend-әзірлеуші</p><small>IT студенті, 2-курс</small></div>
+    </div>
+    <div class="face back">
+      <h2>Байланыс</h2>
+      <ul>
+        <li><span>Пошта:</span> <a href="mailto:your@email.com">your@email.com</a></li>
+        <li><span>Telegram:</span> <a href="https://t.me/username">@username</a></li>
+        <li><span>GitHub:</span> <a href="https://github.com/username">github.com/username</a></li>
+        <li><span>Университет:</span> Қ. Жұбанов атындағы Ақтөбе өңірлік университеті</li>
+      </ul>
+    </div>
+  </div>
+</div></div>
+<button id="flip" aria-pressed="false">Бұру</button>
+<div class="chips"><b>HTML</b><b>CSS</b><b>JavaScript</b><b>Git</b><b>VS Code</b></div>
+<script>
+const card=document.getElementById('card'),btn=document.getElementById('flip'),tilt=document.getElementById('tilt'),sc=document.getElementById('scene');
+function flip(){const f=card.classList.toggle('flip');btn.setAttribute('aria-pressed',f)}
+card.onclick=btn.onclick=flip;
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
+ sc.addEventListener('pointermove',e=>{const b=sc.getBoundingClientRect();
+  tilt.style.setProperty('--ry',((e.clientX-b.left)/b.width-.5)*14+'deg');
+  tilt.style.setProperty('--rx',(.5-(e.clientY-b.top)/b.height)*14+'deg')});
+ sc.addEventListener('pointerleave',()=>{tilt.style.removeProperty('--rx');tilt.style.removeProperty('--ry')});
+}
+</script>
+</body>
+</html>
